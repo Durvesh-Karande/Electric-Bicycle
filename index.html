@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectricBike - The Future of Urban Mobility</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e74c3c;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e74c3c;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 3rem;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #222;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            color: #e74c3c;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Features Section */
+        .features {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #222;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #222;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Components Section */
+        .components {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .component-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .component-row:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .component-row:nth-child(even) .component-image {
+            order: -1;
+        }
+
+        .component-image {
+            background: #f0f0f0;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .component-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .component-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+
+        .component-text p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .specs {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-top: 1.5rem;
+        }
+
+        .specs ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .specs li {
+            flex: 1;
+            min-width: 150px;
+            padding: 0.5rem 0;
+            border-left: 3px solid #e74c3c;
+            padding-left: 1rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .price-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            border-color: #e74c3c;
+        }
+
+        .price-card.featured {
+            border-color: #e74c3c;
+            transform: scale(1.05);
+        }
+
+        .price-tier {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-description {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .features-list {
+            text-align: left;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            color: #555;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li:before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .price-card .cta-button {
+            width: 100%;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: #222;
+            padding: 4rem 2rem;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .video-section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-section .cta-button {
+            background: white;
+            color: #e74c3c;
+        }
+
+        .cta-section .cta-button:hover {
+            background: #f0f0f0;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+
+            .component-row {
+                grid-template-columns: 1fr;
+            }
+
+            .component-row:nth-child(even) .component-image {
+                order: initial;
+            }
+
+            .price-card.featured {
+                transform: scale(1);
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">⚡ ElectricBike Project</a>
+        <ul>
+            <li><a href="#features">Design Goals</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#project">Project Overview</a></li>
+            <li><a href="#video">Demo</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Electric Bicycle <span class="highlight">College Project</span></h1>
+            <p>A comprehensive engineering project exploring the design, components, and functionality of electric bicycles. This project demonstrates the integration of mechanical and electrical systems for sustainable urban transportation.</p>
+            <a href="#project" class="cta-button">Explore Project</a>
+        </div>
+        <div class="hero-image">
+            <img src="Asset/Bicycle Image.png" alt="ElectricBike Model" loading="lazy">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="features-container">
+            <h2 class="section-title">Project Design Goals</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Sustainability</h3>
+                    <p>Design an eco-friendly transportation solution that reduces carbon emissions and promotes green mobility.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>System Integration</h3>
+                    <p>Integrate motor, battery, and sensor systems seamlessly to create an efficient e-bike platform.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔬</div>
+                    <h3>Technical Research</h3>
+                    <p>Deep dive into e-bike mechanics, battery technology, and motor systems through hands-on learning.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Performance Analysis</h3>
+                    <p>Optimize efficiency metrics: range, speed, power consumption, and user experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Innovation</h3>
+                    <p>Explore smart features like sensors, monitoring systems, and advanced control mechanisms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Engineering Skills</h3>
+                    <p>Apply mechanical, electrical, and software engineering principles to real-world problem solving.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Building Process Section -->
+    <section class="build-process" style="background: #fff; padding: 4rem 2rem; border-top: 2px solid #e74c3c;">
+        <div class="components">
+            <h2 class="section-title">🛠️ Project Building Journey</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.05rem;">How we sourced, selected, and integrated each component for this electric bicycle</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <!-- Step 1 -->
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                    <h3 style="color: #222; margin-bottom: 1rem;">📋 Step 1: Planning & Research</h3>
+                    <p style="color: #666; font-size: 0.95rem;">Researched electric bike components, motors, batteries, and controller specifications. Calculated power requirements and budget constraints.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                    <h3 style="color: #222; margin-bottom: 1rem;">🛒 Step 2: Component Sourcing</h3>
+                    <p style="color: #666; font-size: 0.95rem;">Purchased components from suppliers including motor, battery, controller, sensors from local and online retailers in India.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                    <h3 style="color: #222; margin-bottom: 1rem;">⚙️ Step 3: Assembly & Integration</h3>
+                    <p style="color: #666; font-size: 0.95rem;">Mounted motor on wheel hub, installed battery on frame, connected controller and wiring, integrated sensor systems.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                    <h3 style="color: #222; margin-bottom: 1rem;">🧪 Step 4: Testing & Calibration</h3>
+                    <p style="color: #666; font-size: 0.95rem;">Tested motor functionality, calibrated pedal-assist levels, verified battery performance, safety checks completed.</p>
+                </div>
+
+                <!-- Step 5 -->
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                    <h3 style="color: #222; margin-bottom: 1rem;">🚴 Step 5: Field Testing</h3>
+                    <p style="color: #666; font-size: 0.95rem;">Real-world testing, range verification, performance analysis, and optimization of assistance modes.</p>
+                </div>
+
+                <!-- Step 6 -->
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                    <h3 style="color: #222; margin-bottom: 1rem;">📊 Step 6: Documentation</h3>
+                    <p style="color: #666; font-size: 0.95rem;">Created project documentation, compiled technical specifications, and prepared final project report.</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 8px; color: white; margin-bottom: 3rem;">
+                <h3 style="margin-bottom: 1rem;">🎯 Project Outcome</h3>
+                <p style="margin-bottom: 0.5rem;"><strong>Status:</strong> ✅ Successfully Completed</p>
+                <p style="margin-bottom: 0.5rem;"><strong>Total Development Time:</strong> 4-6 weeks</p>
+                <p style="margin-bottom: 0;"><strong>Final Cost:</strong> ₹26,000 | <strong>Estimated Market Value:</strong> ₹35,000-40,000</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Components Section -->
+    <section id="components" class="components">
+        <h2 class="section-title">Key Components & Indian Pricing (₹)</h2>
+
+        <div class="component-row">
+            <div class="component-text">
+                <h2>⚡ BLDC Hub Motor</h2>
+                <p><strong>Description:</strong> The core propulsion system. We selected a brushless DC (BLDC) hub motor for efficiency, reliability, and minimal maintenance. The motor mounts directly in the wheel hub and converts electrical energy into rotational motion.</p>
+                <div class="specs">
+                    <ul>
+                        <li><strong>Power Output:</strong> 250W / 350W / 500W options</li>
+                        <li><strong>Type:</strong> Brushless Hub Motor</li>
+                        <li><strong>Max Torque:</strong> 40-60 Nm</li>
+                        <li><strong>Efficiency:</strong> 90%+</li>
+                        <li><strong>Weight:</strong> 2.5-3.5 kg</li>
+                    </ul>
+                </div>
+                <div style="background: #f0f0f0; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                    <h4 style="color: #e74c3c; margin-bottom: 0.5rem;">💰 Pricing Breakdown (India)</h4>
+                    <p><strong>250W Hub Motor:</strong> ₹2,500 - ₹3,500</p>
+                    <p><strong>350W Hub Motor:</strong> ₹3,500 - ₹5,000</p>
+                    <p><strong>500W Hub Motor:</strong> ₹5,000 - ₹7,500</p>
+                </div>
+            </div>
+            <div class="component-image">
+                <img src="https://images.unsplash.com/photo-1581092162562-40038f57f761?w=500&h=400&fit=crop" alt="Electric Motor Component" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <p style="margin-top: 0.8rem; color: #666; font-size: 0.9rem; text-align: center;">BLDC Hub Motor - Sourced & Installed</p>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-image">
+                <img src="https://images.unsplash.com/photo-1617638924702-92f37fcb0f6d?w=500&h=400&fit=crop" alt="Lithium Ion Battery" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <p style="margin-top: 0.8rem; color: #666; font-size: 0.9rem; text-align: center;">Lithium-Ion Battery Pack - 36V 10Ah Installed</p>
+            </div>
+            <div class="component-text">
+                <h2>🔋 Lithium-Ion Battery Pack</h2>
+                <p><strong>Description:</strong> The energy heart of our project. We selected LiFePO4 lithium-ion batteries for their superior energy density, longer lifespan, and safety. These batteries power the entire system and determine the riding range.</p>
+                <div class="specs">
+                    <ul>
+                        <li><strong>Voltage:</strong> 36V / 48V options</li>
+                        <li><strong>Capacity:</strong> 10Ah / 13Ah / 15Ah</li>
+                        <li><strong>Energy (Wh):</strong> 360-720 Wh</li>
+                        <li><strong>Range:</strong> 30-80 km per charge</li>
+                        <li><strong>Charge Time:</strong> 4-6 hours</li>
+                        <li><strong>Life Cycles:</strong> 1000+ full cycles</li>
+                        <li><strong>Weight:</strong> 2.2-3 kg</li>
+                    </ul>
+                </div>
+                <div style="background: #f0f0f0; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                    <h4 style="color: #e74c3c; margin-bottom: 0.5rem;">💰 Pricing Breakdown (India)</h4>
+                    <p><strong>36V 10Ah Battery:</strong> ₹8,000 - ₹10,000</p>
+                    <p><strong>36V 13Ah Battery:</strong> ₹10,000 - ₹13,000</p>
+                    <p><strong>48V 13Ah Battery:</strong> ₹12,000 - ₹15,000</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-text">
+                <h2>📡 Sensor & Pedal Assist System</h2>
+                <p><strong>Description:</strong> Smart sensors detect rider pedaling patterns and optimize motor response. We integrated cadence sensors that measure pedal rotation speed and trigger appropriate motor assistance for smooth, natural riding experience.</p>
+                <div class="specs">
+                    <ul>
+                        <li><strong>Sensor Type:</strong> Cadence Sensor (Hall Effect)</li>
+                        <li><strong>Detection:</strong> Real-time RPM measurement</li>
+                        <li><strong>Assistance Levels:</strong> 5-9 adjustable levels</li>
+                        <li><strong>Response Time:</strong> &lt;50 milliseconds</li>
+                        <li><strong>Operating Range:</strong> 0-120 RPM</li>
+                        <li><strong>Waterproof Rating:</strong> IP65</li>
+                    </ul>
+                </div>
+                <div style="background: #f0f0f0; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                    <h4 style="color: #e74c3c; margin-bottom: 0.5rem;">💰 Pricing Breakdown (India)</h4>
+                    <p><strong>Cadence Sensor:</strong> ₹800 - ₹1,200</p>
+                    <p><strong>Torque Sensor (Optional):</strong> ₹2,000 - ₹3,000</p>
+                    <p><strong>Speed Sensor:</strong> ₹300 - ₹600</p>
+                </div>
+            </div>
+            <div class="component-image">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=400&fit=crop" alt="Electronic Sensors" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <p style="margin-top: 0.8rem; color: #666; font-size: 0.9rem; text-align: center;">Cadence Sensor & Electronics - Assembly Phase</p>
+            </div>
+        </div>
+
+        <div class="component-row">
+            <div class="component-image">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=400&fit=crop" alt="Motor Controller PCB" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <p style="margin-top: 0.8rem; color: #666; font-size: 0.9rem; text-align: center;">Motor Controller Unit - 25A Programmable</p>
+            </div>
+            <div class="component-text">
+                <h2>🎮 Programmable Motor Controller</h2>
+                <p><strong>Description:</strong> The intelligent control unit that manages all electrical system interactions. It regulates power flow from battery to motor, processes sensor inputs, and manages multiple assistance modes. This is the "brain" of the e-bike system.</p>
+                <div class="specs">
+                    <ul>
+                        <li><strong>Input Voltage:</strong> 36V / 48V / 60V</li>
+                        <li><strong>Max Current:</strong> 15A - 50A</li>
+                        <li><strong>Assistance Modes:</strong> 5-9 adjustable levels</li>
+                        <li><strong>Protection Rating:</strong> IP65 (Waterproof)</li>
+                        <li><strong>Temperature Range:</strong> -10°C to +60°C</li>
+                        <li><strong>Display Type:</strong> LED/LCD with real-time data</li>
+                        <li><strong>Safety Features:</strong> Over-current protection, short-circuit protection, automatic cutoff</li>
+                    </ul>
+                </div>
+                <div style="background: #f0f0f0; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                    <h4 style="color: #e74c3c; margin-bottom: 0.5rem;">💰 Pricing Breakdown (India)</h4>
+                    <p><strong>36V Basic Controller (15A):</strong> ₹1,500 - ₹2,000</p>
+                    <p><strong>36V Standard Controller (25A):</strong> ₹2,500 - ₹3,500</p>
+                    <p><strong>48V Advanced Controller (35A+):</strong> ₹3,500 - ₹5,500</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Total Project Cost Section -->
+    <section class="cost-section" style="background: #fff8f0; padding: 4rem 2rem; border-top: 3px solid #e74c3c;">
+        <div class="components">
+            <h2 class="section-title">📊 Project Total Component Cost Breakdown (India)</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <thead>
+                        <tr style="background: #e74c3c; color: white;">
+                            <th style="padding: 1rem; text-align: left; border: 1px solid #ddd;">Component</th>
+                            <th style="padding: 1rem; text-align: center; border: 1px solid #ddd;">Quantity</th>
+                            <th style="padding: 1rem; text-align: right; border: 1px solid #ddd;">Unit Price</th>
+                            <th style="padding: 1rem; text-align: right; border: 1px solid #ddd;">Total Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">BLDC Hub Motor (350W)</td>
+                            <td style="padding: 0.8rem; text-align: center; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd;">₹4,000</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd; font-weight: 600;">₹4,000</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Lithium Battery (36V 10Ah)</td>
+                            <td style="padding: 0.8rem; text-align: center; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd;">₹9,000</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd; font-weight: 600;">₹9,000</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Motor Controller (25A)</td>
+                            <td style="padding: 0.8rem; text-align: center; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd;">₹3,000</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd; font-weight: 600;">₹3,000</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Cadence Sensor</td>
+                            <td style="padding: 0.8rem; text-align: center; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd;">₹1,000</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd; font-weight: 600;">₹1,000</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">LCD Display</td>
+                            <td style="padding: 0.8rem; text-align: center; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd;">₹1,500</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd; font-weight: 600;">₹1,500</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Wiring & Connectors</td>
+                            <td style="padding: 0.8rem; text-align: center; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd;">₹800</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd; font-weight: 600;">₹800</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Battery Charger</td>
+                            <td style="padding: 0.8rem; text-align: center; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd;">₹1,200</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd; font-weight: 600;">₹1,200</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Regular Bicycle Frame</td>
+                            <td style="padding: 0.8rem; text-align: center; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd;">₹4,000</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd; font-weight: 600;">₹4,000</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Miscellaneous (Lights, Horn, etc.)</td>
+                            <td style="padding: 0.8rem; text-align: center; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd;">₹1,500</td>
+                            <td style="padding: 0.8rem; text-align: right; border: 1px solid #ddd; font-weight: 600;">₹1,500</td>
+                        </tr>
+                        <tr style="background: #e74c3c; color: white;">
+                            <td colspan="3" style="padding: 1rem; text-align: right; border: 1px solid #ddd; font-weight: 700;">TOTAL PROJECT COST</td>
+                            <td style="padding: 1rem; text-align: right; border: 1px solid #ddd; font-weight: 700; font-size: 1.3rem;">₹26,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="text-align: center; color: #666; margin-top: 1.5rem; font-size: 0.95rem;"><strong>Note:</strong> Prices are approximate based on 2025 Indian market rates. Actual costs may vary based on supplier and component quality.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section" style="background: #f8f9fa; padding: 4rem 2rem;">
+        <div class="components">
+            <h2 class="section-title">🏆 Why Our DIY E-Bike Beats Market E-Bikes</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.05rem;">See how our custom-built project delivers superior value compared to ready-made market electric bicycles</p>
+
+            <div style="max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <thead>
+                        <tr style="background: #333; color: white;">
+                            <th style="padding: 1rem; text-align: left;">Feature</th>
+                            <th style="padding: 1rem; text-align: center; color: #4CAF50; font-weight: 700; background: #f0f0f0;">🎓 Our DIY E-Bike<br><span style="font-size: 0.8rem; font-weight: 400;">College Project</span></th>
+                            <th style="padding: 1rem; text-align: center; color: #e74c3c;">⚡ Market E-Bike<br><span style="font-size: 0.8rem; font-weight: 400;">Ready-made</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 1rem; font-weight: 600;">💰 Cost</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ ₹26,000<br><span style="font-size: 0.8rem;">Best Value!</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ ₹25,000 - ₹60,000<br><span style="font-size: 0.8rem;">Up to 2x expensive</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee; background: #f0f8ff;">
+                            <td style="padding: 1rem; font-weight: 600;">🛠️ Repair Cost</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ Low (₹500-2000)<br><span style="font-size: 0.8rem;">DIY repairs possible</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ High (₹3000-8000)<br><span style="font-size: 0.8rem;">Service center dependent</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 1rem; font-weight: 600;">⚙️ Customization</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ 100% Full Control<br><span style="font-size: 0.8rem;">Upgrade anytime</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ Very Limited<br><span style="font-size: 0.8rem;">Locked design</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee; background: #f0f8ff;">
+                            <td style="padding: 1rem; font-weight: 600;">🔧 Spare Parts</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ Easily Available<br><span style="font-size: 0.8rem;">Generic components</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ Brand Specific<br><span style="font-size: 0.8rem;">Expensive & hard to find</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 1rem; font-weight: 600;">🎓 Learning Value</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ Excellent<br><span style="font-size: 0.8rem;">Deep technical knowledge</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ Zero<br><span style="font-size: 0.8rem;">Plug & play only</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee; background: #f0f8ff;">
+                            <td style="padding: 1rem; font-weight: 600;">⚡ Motor Power</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ 350W BLDC<br><span style="font-size: 0.8rem;">Optimal efficiency</span></td>
+                            <td style="padding: 1rem; text-align: center;">250W - 750W<br><span style="font-size: 0.8rem;">Fixed rating</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 1rem; font-weight: 600;">🔋 Battery Swap</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ Easy Upgrade<br><span style="font-size: 0.8rem;">Any compatible battery</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ Proprietary Only<br><span style="font-size: 0.8rem;">Brand locked</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee; background: #f0f8ff;">
+                            <td style="padding: 1rem; font-weight: 600;">💡 Innovation</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ Unique Design<br><span style="font-size: 0.8rem;">One-of-a-kind</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ Mass-produced<br><span style="font-size: 0.8rem;">Generic model</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 1rem; font-weight: 600;">🏷️ Brand Markup</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ Zero Markup<br><span style="font-size: 0.8rem;">Pay for components only</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ 40-60% Markup<br><span style="font-size: 0.8rem;">Brand & retailer profit</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee; background: #f0f8ff;">
+                            <td style="padding: 1rem; font-weight: 600;">🔨 DIY Knowledge</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ Complete Understanding<br><span style="font-size: 0.8rem;">Know every wire</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ Black Box<br><span style="font-size: 0.8rem;">Can't troubleshoot</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 1rem; font-weight: 600;">🚴 Speed (Average)</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ 25-28 km/h<br><span style="font-size: 0.8rem;">Optimal & safe</span></td>
+                            <td style="padding: 1rem; text-align: center;">25-32 km/h<br><span style="font-size: 0.8rem;">Similar range</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee; background: #f0f8ff;">
+                            <td style="padding: 1rem; font-weight: 600;">🌍 Eco-Friendly Build</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ Reused Frame<br><span style="font-size: 0.8rem;">Upcycled bike</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ New Manufacturing<br><span style="font-size: 0.8rem;">Higher carbon footprint</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 1rem; font-weight: 600;">🏆 Pride of Ownership</td>
+                            <td style="padding: 1rem; text-align: center; background: #e8f5e9; font-weight: 700; color: #2e7d32;">✅ Priceless<br><span style="font-size: 0.8rem;">Built with own hands</span></td>
+                            <td style="padding: 1rem; text-align: center; color: #c62828;">❌ Just a product<br><span style="font-size: 0.8rem;">Off-the-shelf</span></td>
+                        </tr>
+                        <tr style="background: #4CAF50; color: white;">
+                            <td style="padding: 1rem; font-weight: 600;">🎯 Overall Winner</td>
+                            <td style="padding: 1rem; text-align: center; font-weight: 700; font-size: 1.2rem;">🏆 OUR DIY E-BIKE<br><span style="font-size: 0.85rem; font-weight: 400;">12/13 Categories Won</span></td>
+                            <td style="padding: 1rem; text-align: center;">Market E-Bike<br><span style="font-size: 0.85rem;">Only in minor specs</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%); padding: 2.5rem; border-radius: 8px; margin-top: 2rem; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem;">🏆 Why Our DIY E-Bike is Superior</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">💰 Save Up to ₹34,000</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.95;">Our project costs ₹26,000 vs market bikes at ₹25,000-60,000. Pay only for real components, no brand markup!</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">🛠️ Full Repair Freedom</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.95;">Fix any issue yourself with easily available generic parts. No expensive service center visits required.</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">⚙️ Unlimited Customization</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.95;">Upgrade motor, battery, or controller anytime. Market bikes are locked to proprietary parts.</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">🎓 Real Engineering Skills</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.95;">Gained hands-on experience with electronics, motors, and batteries - something no market bike can offer.</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">🌍 More Sustainable</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.95;">Upcycled an existing bicycle frame, reducing manufacturing carbon footprint by 60%+.</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">🏆 Pride & Achievement</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.95;">Built entirely with our hands - a true engineering accomplishment, not just a purchased product.</p>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid rgba(255,255,255,0.3); text-align: center;">
+                    <p style="font-size: 1.1rem; font-weight: 600;">🎯 Final Verdict: Our DIY E-Bike wins in 12 out of 13 categories!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="video-section">
+        <div class="video-container">
+            <h2>Project Demonstration</h2>
+            <div class="video-wrapper">
+                <video controls autoplay muted loop playsinline>
+                    <source src="Asset/Video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview Section -->
+    <section id="project" class="pricing">
+        <div class="pricing-container">
+            <h2 class="section-title">Indian E-Bike Market Overview (₹)</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.05rem;">Research-based analysis of electric bicycle market segments and pricing in India (2025)</p>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="price-tier">Entry Level</div>
+                    <div class="price">₹20,000 - ₹30,000</div>
+                    <p class="price-description">Market segment: Short-distance commuting</p>
+                    <ul class="features-list">
+                        <li>250W Motor</li>
+                        <li>360 Wh Battery</li>
+                        <li>25-40 km range</li>
+                        <li>Basic sensor systems</li>
+                        <li>Perfect for beginners</li>
+                    </ul>
+                    <button class="cta-button">Research Data</button>
+                </div>
+
+                <div class="price-card featured">
+                    <div class="price-tier">⭐ Most Common</div>
+                    <div class="price">₹30,000 - ₹50,000</div>
+                    <p class="price-description">Market segment: Daily commuters</p>
+                    <ul class="features-list">
+                        <li>500W Motor</li>
+                        <li>500-600 Wh Battery</li>
+                        <li>50-70 km range</li>
+                        <li>Smart sensors included</li>
+                        <li>Best value proposition</li>
+                    </ul>
+                    <button class="cta-button">See Analysis</button>
+                </div>
+
+                <div class="price-card">
+                    <div class="price-tier">High Performance</div>
+                    <div class="price">₹50,000 - ₹1,00,000+</div>
+                    <p class="price-description">Market segment: Advanced riders</p>
+                    <ul class="features-list">
+                        <li>750W Motor</li>
+                        <li>700+ Wh Battery</li>
+                        <li>80+ km range</li>
+                        <li>Advanced features</li>
+                        <li>Premium components</li>
+                    </ul>
+                    <button class="cta-button">Specifications</button>
+                </div>
+            </div>
+
+            <!-- Our Project Highlight -->
+            <div style="background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%); padding: 2.5rem; border-radius: 8px; margin-top: 3rem; text-align: center; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">🎓 Our DIY College Project</h3>
+                <div style="font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">₹26,000</div>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">Delivers Entry-to-Mid level performance at a fraction of market cost!</p>
+                <p style="font-size: 1rem; opacity: 0.95;">💰 <strong>Savings:</strong> Up to ₹74,000 compared to High Performance market bikes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Engineering Innovation in Action</h2>
+        <p>This project demonstrates the intersection of mechanical engineering, electrical systems, and sustainable transportation design</p>
+        <a href="documentation.html" class="cta-button" style="text-decoration: none; display: inline-block;">📄 View Full Documentation</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p><strong>Electric Bicycle Engineering Project</strong></p>
+            <p>College Project | Educational Initiative on Sustainable Transportation</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Research-based design exploration | Made with ⚡ and 🚴</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electric Bicycle - Project Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Times New Roman', serif;
+            color: #222;
+            line-height: 1.8;
+            background: #fff;
+        }
+
+        /* Navigation */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            background: #e74c3c;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .top-nav a:hover {
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Cover Page */
+        .cover-page {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        .cover-page h1 {
+            font-size: 3rem;
+            color: #222;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .cover-page .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .cover-details {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+            max-width: 600px;
+        }
+
+        .cover-details p {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+
+        .cover-details strong {
+            color: #e74c3c;
+        }
+
+        /* Content Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-left: 4px solid #e74c3c;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            color: #222;
+            margin-bottom: 1rem;
+        }
+
+        .toc ol {
+            margin-left: 1.5rem;
+            color: #444;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        h2.section-heading {
+            color: #222;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        h3 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h4 {
+            color: #444;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #333;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background: #e74c3c;
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .info-box h4 {
+            color: #1976d2;
+            margin-top: 0;
+        }
+
+        .highlight-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        /* Code-like specifications */
+        .spec-block {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .doc-footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .doc-footer p {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Print styles */
+        @media print {
+            .top-nav {
+                display: none;
+            }
+            body {
+                font-size: 12pt;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cover-page h1 {
+                font-size: 2rem;
+            }
+            .container {
+                padding: 2rem 1rem;
+            }
+            h2.section-heading {
+                font-size: 1.5rem;
+            }
+            .top-nav {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="index.html" class="back-btn">← Back to Project</a>
+        <span>📄 Project Documentation</span>
+        <a href="#" onclick="window.print(); return false;">🖨️ Print</a>
+    </nav>
+
+    <!-- Cover Page -->
+    <div class="cover-page">
+        <h1>⚡ Electric Bicycle</h1>
+        <p class="subtitle">A Sustainable DIY Engineering Project</p>
+        <div class="cover-details">
+            <p><strong>Project Title:</strong> Design & Development of Electric Bicycle</p>
+            <p><strong>Project Type:</strong> College Engineering Project</p>
+            <p><strong>Academic Year:</strong> 2025-2026</p>
+            <p><strong>Submitted By:</strong> Durvesh Karande</p>
+            <p><strong>Technology:</strong> Electrical & Mechanical Engineering</p>
+            <p><strong>Document Version:</strong> 1.0</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>📋 Table of Contents</h2>
+            <ol>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#objectives">Project Objectives</a></li>
+                <li><a href="#literature">Literature Review</a></li>
+                <li><a href="#components">Components & Specifications</a></li>
+                <li><a href="#working">Working Principle</a></li>
+                <li><a href="#methodology">Methodology & Building Process</a></li>
+                <li><a href="#circuit">Circuit Diagram & Connections</a></li>
+                <li><a href="#testing">Testing & Results</a></li>
+                <li><a href="#cost">Cost Analysis</a></li>
+                <li><a href="#advantages">Advantages & Limitations</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="#future">Future Scope</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#references">References</a></li>
+            </ol>
+        </div>
+
+        <!-- 1. Abstract -->
+        <section id="abstract">
+            <h2 class="section-heading">1. Abstract</h2>
+            <p>This project presents the design, development, and implementation of an Electric Bicycle (E-Bike) as a sustainable alternative to conventional transportation. The primary goal was to convert a standard bicycle into an electric-powered vehicle by integrating a BLDC hub motor, lithium-ion battery pack, motor controller, and pedal-assist sensor system.</p>
+            <p>The project demonstrates the practical application of electrical and mechanical engineering principles in creating an eco-friendly mobility solution at a total cost of approximately <strong>₹26,000</strong>, significantly lower than commercially available electric bicycles (₹30,000 - ₹1,00,000). The completed prototype achieves a top speed of 25-28 km/h with a range of 30-40 km per charge, making it suitable for short to medium distance commuting.</p>
+            <p>Key outcomes include hands-on understanding of e-bike systems, cost-effective engineering design, and promoting sustainable transportation in urban India.</p>
+        </section>
+
+        <!-- 2. Introduction -->
+        <section id="introduction">
+            <h2 class="section-heading">2. Introduction</h2>
+            <h3>2.1 Background</h3>
+            <p>With rising fuel prices, increasing traffic congestion, and growing environmental concerns, there is an urgent need for sustainable transportation alternatives. Electric bicycles offer an excellent solution for urban mobility, combining the benefits of traditional cycling with motorized assistance.</p>
+
+            <h3>2.2 Problem Statement</h3>
+            <p>Commercial electric bicycles in India are priced between ₹30,000 to ₹1,00,000+, making them inaccessible to many students and budget-conscious users. This project aims to develop a functional electric bicycle at a significantly lower cost through DIY conversion, while providing valuable engineering learning.</p>
+
+            <h3>2.3 Motivation</h3>
+            <p>The motivation behind this project is threefold:</p>
+            <ul>
+                <li><strong>Educational:</strong> Gain hands-on experience with motor, battery, and control systems</li>
+                <li><strong>Environmental:</strong> Promote zero-emission transportation</li>
+                <li><strong>Economic:</strong> Develop an affordable e-bike solution</li>
+            </ul>
+        </section>
+
+        <!-- 3. Objectives -->
+        <section id="objectives">
+            <h2 class="section-heading">3. Project Objectives</h2>
+            <h3>3.1 Primary Objectives</h3>
+            <ol>
+                <li>To design and develop a functional electric bicycle using readily available components</li>
+                <li>To integrate BLDC motor, lithium-ion battery, and controller systems seamlessly</li>
+                <li>To achieve a minimum range of 30 km per charge with speeds up to 25 km/h</li>
+                <li>To keep the total project cost under ₹30,000</li>
+            </ol>
+
+            <h3>3.2 Secondary Objectives</h3>
+            <ol>
+                <li>Demonstrate practical applications of electrical engineering concepts</li>
+                <li>Promote eco-friendly transportation alternatives</li>
+                <li>Document the entire process for future research and development</li>
+                <li>Compare DIY solution with commercially available products</li>
+            </ol>
+        </section>
+
+        <!-- 4. Literature Review -->
+        <section id="literature">
+            <h2 class="section-heading">4. Literature Review</h2>
+            <p>Electric bicycles have evolved significantly since their initial patent in 1895. Modern e-bikes utilize advanced lithium-ion batteries, brushless DC motors, and sophisticated control systems.</p>
+
+            <h3>4.1 Types of Electric Bicycle Motors</h3>
+            <ul>
+                <li><strong>Hub Motors:</strong> Located in the wheel hub (front or rear). Simple installation, lower cost.</li>
+                <li><strong>Mid-Drive Motors:</strong> Located at the pedal crank. Better balance, higher efficiency for hills.</li>
+                <li><strong>Friction Drive:</strong> Motor drives the tire through friction. Less common, less efficient.</li>
+            </ul>
+
+            <h3>4.2 Battery Technologies</h3>
+            <table>
+                <tr>
+                    <th>Battery Type</th>
+                    <th>Energy Density</th>
+                    <th>Cycle Life</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>Lead-Acid</td>
+                    <td>30-40 Wh/kg</td>
+                    <td>300-500</td>
+                    <td>Low</td>
+                </tr>
+                <tr>
+                    <td>NiMH</td>
+                    <td>60-80 Wh/kg</td>
+                    <td>500-1000</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>Lithium-Ion</td>
+                    <td>100-265 Wh/kg</td>
+                    <td>1000-2000</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>LiFePO4 (Selected)</td>
+                    <td>90-120 Wh/kg</td>
+                    <td>2000-5000</td>
+                    <td>Medium-High</td>
+                </tr>
+            </table>
+
+            <h3>4.3 Control Systems</h3>
+            <p>Modern e-bikes use programmable controllers that manage power flow, integrate sensor inputs, and provide multiple assistance modes. Controllers typically include over-current protection, temperature monitoring, and regenerative braking capabilities.</p>
+        </section>
+
+        <!-- 5. Components -->
+        <section id="components">
+            <h2 class="section-heading">5. Components & Specifications</h2>
+
+            <h3>5.1 BLDC Hub Motor</h3>
+            <div class="spec-block">
+                <strong>Specifications:</strong><br>
+                • Type: Brushless DC Hub Motor<br>
+                • Power Rating: 350W<br>
+                • Voltage: 36V<br>
+                • Maximum Torque: 40 Nm<br>
+                • Efficiency: 90%+<br>
+                • Weight: 3 kg<br>
+                • Wheel Size: 26 inches
+            </div>
+            <p><strong>Function:</strong> Converts electrical energy from the battery into mechanical rotation, driving the wheel forward.</p>
+
+            <h3>5.2 Lithium-Ion Battery Pack</h3>
+            <div class="spec-block">
+                <strong>Specifications:</strong><br>
+                • Chemistry: Lithium-Ion (18650 cells)<br>
+                • Voltage: 36V<br>
+                • Capacity: 10Ah (360 Wh)<br>
+                • Charging Time: 5-6 hours<br>
+                • Cycle Life: 1000+ cycles<br>
+                • Weight: 2.5 kg<br>
+                • Protection: BMS (Battery Management System)
+            </div>
+            <p><strong>Function:</strong> Stores electrical energy and provides power to the motor and electronic components.</p>
+
+            <h3>5.3 Motor Controller</h3>
+            <div class="spec-block">
+                <strong>Specifications:</strong><br>
+                • Type: Programmable BLDC Controller<br>
+                • Input Voltage: 36V<br>
+                • Maximum Current: 25A<br>
+                • Power Output: 500W peak<br>
+                • Assistance Levels: 5 modes<br>
+                • Protection: Overcurrent, Short-circuit, Temperature<br>
+                • IP Rating: IP65 (Waterproof)
+            </div>
+            <p><strong>Function:</strong> Regulates power flow between battery and motor, processes throttle/pedal inputs, manages assistance modes.</p>
+
+            <h3>5.4 Pedal Assist Sensor (PAS)</h3>
+            <div class="spec-block">
+                <strong>Specifications:</strong><br>
+                • Type: Cadence Sensor (Hall Effect)<br>
+                • Magnets: 12-pole magnet disc<br>
+                • Operating Voltage: 5V DC<br>
+                • Response Time: &lt;50ms<br>
+                • Temperature Range: -10°C to +60°C
+            </div>
+            <p><strong>Function:</strong> Detects pedaling motion and signals the controller to activate motor assistance.</p>
+
+            <h3>5.5 LCD Display</h3>
+            <div class="spec-block">
+                <strong>Specifications:</strong><br>
+                • Display Type: LCD backlit<br>
+                • Information: Speed, Battery Level, Assistance Level, Odometer<br>
+                • Mounting: Handlebar mount<br>
+                • Weather Protection: IP65
+            </div>
+
+            <h3>5.6 Additional Components</h3>
+            <ul>
+                <li><strong>Throttle:</strong> Thumb throttle for direct motor control</li>
+                <li><strong>Brake Sensors:</strong> Cuts motor power when brakes are applied</li>
+                <li><strong>Wiring Harness:</strong> Connects all electrical components</li>
+                <li><strong>Battery Charger:</strong> 36V 2A charger with auto-shutoff</li>
+                <li><strong>Bicycle Frame:</strong> Standard 26" MTB frame</li>
+            </ul>
+        </section>
+
+        <!-- 6. Working Principle -->
+        <section id="working">
+            <h2 class="section-heading">6. Working Principle</h2>
+            <p>The electric bicycle operates on a simple principle: electrical energy stored in the battery is converted to mechanical energy by the motor, which propels the bicycle forward.</p>
+
+            <h3>6.1 Basic Operation Flow</h3>
+            <div class="spec-block">
+                Battery → Controller → Motor → Wheel Rotation<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑ ↓<br>
+                &nbsp;&nbsp;PAS Sensor / Throttle (User Input)
+            </div>
+
+            <h3>6.2 Pedal Assist Mode</h3>
+            <ol>
+                <li>User begins pedaling the bicycle</li>
+                <li>Cadence sensor detects pedal rotation via Hall effect magnets</li>
+                <li>Sensor sends signal to controller</li>
+                <li>Controller activates motor based on selected assistance level</li>
+                <li>Motor provides supplementary power proportional to user effort</li>
+                <li>Bicycle moves forward with combined human + motor power</li>
+            </ol>
+
+            <h3>6.3 Throttle Mode</h3>
+            <ol>
+                <li>User activates thumb throttle on handlebar</li>
+                <li>Throttle sends analog voltage signal (0-4.5V) to controller</li>
+                <li>Controller calculates required motor power</li>
+                <li>Motor activates directly without pedaling</li>
+                <li>Bicycle moves forward on motor power alone</li>
+            </ol>
+
+            <h3>6.4 Safety Systems</h3>
+            <ul>
+                <li><strong>Brake Cutoff:</strong> Motor power cuts immediately when brake is applied</li>
+                <li><strong>BMS Protection:</strong> Prevents overcharge, over-discharge, and short circuits</li>
+                <li><strong>Controller Protection:</strong> Over-current, over-temperature safeguards</li>
+            </ul>
+        </section>
+
+        <!-- 7. Methodology -->
+        <section id="methodology">
+            <h2 class="section-heading">7. Methodology & Building Process</h2>
+
+            <h3>Phase 1: Research & Planning (Week 1)</h3>
+            <ul>
+                <li>Studied electric bicycle technology and components</li>
+                <li>Calculated power requirements and battery capacity needs</li>
+                <li>Defined budget and sourcing strategy</li>
+                <li>Created detailed component list and specifications</li>
+            </ul>
+
+            <h3>Phase 2: Component Procurement (Week 2)</h3>
+            <ul>
+                <li>Purchased BLDC hub motor from local electrical supplier</li>
+                <li>Sourced lithium-ion battery pack with BMS</li>
+                <li>Acquired motor controller and LCD display</li>
+                <li>Bought pedal assist sensor and wiring components</li>
+                <li>Selected compatible bicycle frame (26" MTB)</li>
+            </ul>
+
+            <h3>Phase 3: Mechanical Assembly (Week 3)</h3>
+            <ol>
+                <li>Removed original rear wheel from bicycle frame</li>
+                <li>Installed hub motor wheel in rear frame dropouts</li>
+                <li>Mounted battery pack on frame using custom bracket</li>
+                <li>Installed controller in a protective enclosure</li>
+                <li>Mounted LCD display on handlebar</li>
+                <li>Attached throttle grip on right handlebar</li>
+            </ol>
+
+            <h3>Phase 4: Electrical Integration (Week 4)</h3>
+            <ol>
+                <li>Connected motor phase wires to controller</li>
+                <li>Wired Hall sensor cables for motor feedback</li>
+                <li>Connected battery to controller with main power cables</li>
+                <li>Integrated PAS sensor to pedal crank area</li>
+                <li>Wired brake cutoff sensors</li>
+                <li>Connected throttle and LCD display</li>
+                <li>Performed cable management and insulation</li>
+            </ol>
+
+            <h3>Phase 5: Testing & Calibration (Week 5)</h3>
+            <ol>
+                <li>Performed initial low-voltage testing (no-load)</li>
+                <li>Tested motor rotation direction and phase sequence</li>
+                <li>Calibrated pedal assist sensitivity</li>
+                <li>Programmed controller for optimal power delivery</li>
+                <li>Tested all safety systems (brake cutoff, BMS)</li>
+                <li>Conducted indoor short-distance tests</li>
+            </ol>
+
+            <h3>Phase 6: Field Testing & Refinement (Week 6)</h3>
+            <ol>
+                <li>Real-world riding tests on various terrains</li>
+                <li>Measured actual range on single charge</li>
+                <li>Verified top speed and acceleration</li>
+                <li>Tested hill-climbing performance</li>
+                <li>Made final adjustments to assistance levels</li>
+                <li>Documented observations and performance data</li>
+            </ol>
+        </section>
+
+        <!-- 8. Circuit Diagram -->
+        <section id="circuit">
+            <h2 class="section-heading">8. Circuit Diagram & Connections</h2>
+
+            <h3>8.1 Block Diagram</h3>
+            <div class="spec-block">
+                ┌──────────────┐<br>
+                │   BATTERY    │ (36V, 10Ah Li-ion)<br>
+                │     BMS      │<br>
+                └──────┬───────┘<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ (Main Power)<br>
+                ┌──────▼───────┐<br>
+                │  CONTROLLER  │◄─── PAS Sensor<br>
+                │    (25A)     │◄─── Throttle<br>
+                │              │◄─── Brake Cutoff<br>
+                └──────┬───────┘◄─── LCD Display<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ (3-Phase Power)<br>
+                ┌──────▼───────┐<br>
+                │  BLDC HUB    │<br>
+                │    MOTOR     │<br>
+                │    (350W)    │<br>
+                └──────────────┘<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+                &nbsp;&nbsp;WHEEL ROTATION
+            </div>
+
+            <h3>8.2 Wiring Specifications</h3>
+            <table>
+                <tr>
+                    <th>Connection</th>
+                    <th>Wire Gauge</th>
+                    <th>Type</th>
+                </tr>
+                <tr>
+                    <td>Battery to Controller</td>
+                    <td>12 AWG</td>
+                    <td>Power (Red/Black)</td>
+                </tr>
+                <tr>
+                    <td>Controller to Motor (Phase)</td>
+                    <td>14 AWG</td>
+                    <td>3-Phase Power</td>
+                </tr>
+                <tr>
+                    <td>Hall Sensor Cable</td>
+                    <td>22 AWG</td>
+                    <td>5-pin Signal</td>
+                </tr>
+                <tr>
+                    <td>Throttle Cable</td>
+                    <td>22 AWG</td>
+                    <td>3-pin Signal</td>
+                </tr>
+                <tr>
+                    <td>PAS Cable</td>
+                    <td>22 AWG</td>
+                    <td>3-pin Signal</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 9. Testing & Results -->
+        <section id="testing">
+            <h2 class="section-heading">9. Testing & Results</h2>
+
+            <h3>9.1 Performance Metrics</h3>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Target Value</th>
+                    <th>Achieved Value</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>Top Speed</td>
+                    <td>25 km/h</td>
+                    <td>28 km/h</td>
+                    <td>✅ Exceeded</td>
+                </tr>
+                <tr>
+                    <td>Range per Charge</td>
+                    <td>30 km</td>
+                    <td>35-40 km</td>
+                    <td>✅ Exceeded</td>
+                </tr>
+                <tr>
+                    <td>Charging Time</td>
+                    <td>6 hours</td>
+                    <td>5.5 hours</td>
+                    <td>✅ Better</td>
+                </tr>
+                <tr>
+                    <td>Total Cost</td>
+                    <td>₹30,000</td>
+                    <td>₹26,000</td>
+                    <td>✅ Under Budget</td>
+                </tr>
+                <tr>
+                    <td>Hill Climbing (5% grade)</td>
+                    <td>Functional</td>
+                    <td>Smooth</td>
+                    <td>✅ Success</td>
+                </tr>
+                <tr>
+                    <td>Load Capacity</td>
+                    <td>75 kg</td>
+                    <td>85 kg</td>
+                    <td>✅ Exceeded</td>
+                </tr>
+            </table>
+
+            <h3>9.2 Test Procedures</h3>
+            <h4>Range Test</h4>
+            <p>Performed on flat urban terrain with one rider (70 kg) and full battery. Used pedal-assist level 3. Average speed maintained at 20-22 km/h. Range recorded: 37 km before battery reached 20% capacity.</p>
+
+            <h4>Speed Test</h4>
+            <p>Conducted on a straight, flat road with minimal wind. Top speed achieved using full throttle and active pedaling: 28 km/h.</p>
+
+            <h4>Hill Climbing Test</h4>
+            <p>Tested on an incline of approximately 5% gradient. Motor provided consistent power assist, enabling comfortable ascent without excessive battery drain.</p>
+
+            <h4>Safety Test</h4>
+            <p>All safety systems verified: brake cutoff works instantly, BMS cut power at low voltage threshold (32V), over-current protection tested via high-load simulation.</p>
+
+            <div class="success-box">
+                <h4>✅ Overall Result:</h4>
+                <p>The project successfully met all primary objectives. The e-bike exceeded target performance in most parameters while staying under budget. The system proved reliable over 200+ km of real-world testing.</p>
+            </div>
+        </section>
+
+        <!-- 10. Cost Analysis -->
+        <section id="cost">
+            <h2 class="section-heading">10. Cost Analysis</h2>
+
+            <h3>10.1 Component Cost Breakdown</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Quantity</th>
+                    <th>Unit Price (₹)</th>
+                    <th>Total (₹)</th>
+                </tr>
+                <tr>
+                    <td>BLDC Hub Motor (350W)</td>
+                    <td>1</td>
+                    <td>4,000</td>
+                    <td>4,000</td>
+                </tr>
+                <tr>
+                    <td>Lithium-Ion Battery (36V 10Ah)</td>
+                    <td>1</td>
+                    <td>9,000</td>
+                    <td>9,000</td>
+                </tr>
+                <tr>
+                    <td>Motor Controller (25A)</td>
+                    <td>1</td>
+                    <td>3,000</td>
+                    <td>3,000</td>
+                </tr>
+                <tr>
+                    <td>Cadence Sensor</td>
+                    <td>1</td>
+                    <td>1,000</td>
+                    <td>1,000</td>
+                </tr>
+                <tr>
+                    <td>LCD Display</td>
+                    <td>1</td>
+                    <td>1,500</td>
+                    <td>1,500</td>
+                </tr>
+                <tr>
+                    <td>Wiring & Connectors</td>
+                    <td>1 set</td>
+                    <td>800</td>
+                    <td>800</td>
+                </tr>
+                <tr>
+                    <td>Battery Charger</td>
+                    <td>1</td>
+                    <td>1,200</td>
+                    <td>1,200</td>
+                </tr>
+                <tr>
+                    <td>Bicycle Frame (26" MTB)</td>
+                    <td>1</td>
+                    <td>4,000</td>
+                    <td>4,000</td>
+                </tr>
+                <tr>
+                    <td>Accessories (Lights, Horn, etc.)</td>
+                    <td>1 set</td>
+                    <td>1,500</td>
+                    <td>1,500</td>
+                </tr>
+                <tr style="background: #e74c3c; color: white; font-weight: 700;">
+                    <td colspan="3">TOTAL PROJECT COST</td>
+                    <td>₹26,000</td>
+                </tr>
+            </table>
+
+            <h3>10.2 Cost Comparison with Market Alternatives</h3>
+            <table>
+                <tr>
+                    <th>Option</th>
+                    <th>Price Range</th>
+                    <th>Savings vs Our Project</th>
+                </tr>
+                <tr>
+                    <td>Our DIY E-Bike</td>
+                    <td>₹26,000</td>
+                    <td>Baseline</td>
+                </tr>
+                <tr>
+                    <td>Entry-Level Market E-Bike</td>
+                    <td>₹30,000 - ₹40,000</td>
+                    <td>₹4,000 - ₹14,000 more</td>
+                </tr>
+                <tr>
+                    <td>Mid-Range Market E-Bike</td>
+                    <td>₹40,000 - ₹60,000</td>
+                    <td>₹14,000 - ₹34,000 more</td>
+                </tr>
+                <tr>
+                    <td>Premium Market E-Bike</td>
+                    <td>₹70,000 - ₹1,00,000+</td>
+                    <td>₹44,000 - ₹74,000+ more</td>
+                </tr>
+            </table>
+
+            <h3>10.3 Operating Cost Analysis</h3>
+            <p><strong>Electricity Cost per Full Charge:</strong></p>
+            <div class="spec-block">
+                Battery capacity: 360 Wh = 0.36 kWh<br>
+                Electricity rate: ₹8/kWh (avg in India)<br>
+                Cost per charge: 0.36 × ₹8 = ₹2.88<br>
+                Cost per km: ₹2.88 ÷ 35 km = <strong>₹0.082 per km</strong>
+            </div>
+            <p>Compared to petrol two-wheeler (₹2-3/km) or car (₹8-10/km), the e-bike offers 95%+ cost savings.</p>
+        </section>
+
+        <!-- 11. Advantages & Limitations -->
+        <section id="advantages">
+            <h2 class="section-heading">11. Advantages & Limitations</h2>
+
+            <h3>11.1 Advantages</h3>
+            <ul>
+                <li><strong>Eco-Friendly:</strong> Zero direct emissions, reduced carbon footprint</li>
+                <li><strong>Cost-Effective:</strong> Low initial cost, minimal operating cost (₹0.08/km)</li>
+                <li><strong>Health Benefits:</strong> Encourages physical activity with optional assistance</li>
+                <li><strong>Traffic Efficient:</strong> Can navigate congested areas easily</li>
+                <li><strong>No License Required:</strong> In India, e-bikes under 250W don't require license/registration</li>
+                <li><strong>Easy Maintenance:</strong> Simple components, mostly DIY-repairable</li>
+                <li><strong>Customizable:</strong> Can upgrade any component independently</li>
+                <li><strong>Silent Operation:</strong> No engine noise</li>
+            </ul>
+
+            <h3>11.2 Limitations</h3>
+            <ul>
+                <li><strong>Limited Range:</strong> 30-40 km per charge limits long-distance use</li>
+                <li><strong>Charging Time:</strong> 5-6 hours for full charge</li>
+                <li><strong>Weather Dependency:</strong> Rain can affect electrical components</li>
+                <li><strong>Weight:</strong> Heavier than regular bicycle (20-22 kg)</li>
+                <li><strong>Battery Life:</strong> Battery replacement needed after 3-4 years</li>
+                <li><strong>Speed Restriction:</strong> Limited to ~25 km/h for legal compliance</li>
+            </ul>
+        </section>
+
+        <!-- 12. Applications -->
+        <section id="applications">
+            <h2 class="section-heading">12. Applications</h2>
+            <ul>
+                <li><strong>Urban Commuting:</strong> Daily office/college travel within 15-20 km</li>
+                <li><strong>Last-Mile Connectivity:</strong> Metro/bus station to home/office</li>
+                <li><strong>Campus Transportation:</strong> Large university and industrial campuses</li>
+                <li><strong>Delivery Services:</strong> Food, courier, and e-commerce deliveries</li>
+                <li><strong>Elderly Mobility:</strong> Low-effort transportation for senior citizens</li>
+                <li><strong>Tourism:</strong> Sightseeing in hilly and extensive areas</li>
+                <li><strong>Police Patrolling:</strong> Urban patrol vehicles in pedestrian zones</li>
+                <li><strong>Rural Transport:</strong> Affordable transportation in villages</li>
+            </ul>
+        </section>
+
+        <!-- 13. Future Scope -->
+        <section id="future">
+            <h2 class="section-heading">13. Future Scope</h2>
+            <p>This project can be enhanced in several ways for future iterations:</p>
+
+            <h3>13.1 Technical Enhancements</h3>
+            <ul>
+                <li><strong>Solar Charging:</strong> Integrate solar panels for self-charging capability</li>
+                <li><strong>Regenerative Braking:</strong> Recover energy during braking</li>
+                <li><strong>Higher Capacity Battery:</strong> Upgrade to 13Ah or 15Ah for 50+ km range</li>
+                <li><strong>Torque Sensor:</strong> Replace cadence sensor for more natural ride feel</li>
+                <li><strong>IoT Integration:</strong> GPS tracking, smartphone app connectivity</li>
+                <li><strong>Anti-theft System:</strong> Alarm, remote lock, GPS tracking</li>
+            </ul>
+
+            <h3>13.2 Smart Features</h3>
+            <ul>
+                <li>Bluetooth connectivity with mobile app</li>
+                <li>Real-time diagnostics and maintenance alerts</li>
+                <li>Route optimization based on battery level</li>
+                <li>Voice command integration</li>
+                <li>Fitness tracking and health monitoring</li>
+            </ul>
+
+            <h3>13.3 Commercialization Potential</h3>
+            <p>The project demonstrates a viable path for affordable e-bike conversion kits targeted at the Indian market. With further optimization and regulatory compliance, it could be developed into a commercial product catering to the ₹20,000-₹30,000 price segment.</p>
+        </section>
+
+        <!-- 14. Conclusion -->
+        <section id="conclusion">
+            <h2 class="section-heading">14. Conclusion</h2>
+            <p>This project successfully demonstrates the design, development, and implementation of an electric bicycle as a sustainable transportation solution. By converting a standard bicycle into an e-bike at a cost of ₹26,000, the project proves that eco-friendly mobility can be accessible to students and budget-conscious consumers in India.</p>
+
+            <p>The completed prototype achieves:</p>
+            <ul>
+                <li>✅ Top speed of 28 km/h (exceeded 25 km/h target)</li>
+                <li>✅ Range of 35-40 km per charge (exceeded 30 km target)</li>
+                <li>✅ Total cost of ₹26,000 (under ₹30,000 budget)</li>
+                <li>✅ Smooth hill-climbing capability</li>
+                <li>✅ Reliable safety systems</li>
+            </ul>
+
+            <p>Beyond the technical achievements, this project provided invaluable hands-on experience in electrical engineering, mechanical integration, and sustainable design. The knowledge gained about motor systems, battery technology, and control electronics is directly applicable to the growing electric vehicle industry.</p>
+
+            <div class="success-box">
+                <h4>Key Takeaway</h4>
+                <p>The project proves that innovative, cost-effective solutions can be developed with careful research, component selection, and engineering discipline. It also contributes to the broader goal of sustainable transportation and environmental preservation.</p>
+            </div>
+        </section>
+
+        <!-- 15. References -->
+        <section id="references">
+            <h2 class="section-heading">15. References</h2>
+            <ol>
+                <li>HOVSCO (2025). "What Is an Electric Bike? Definition, Components, and How It Works." Retrieved from hovsco.com</li>
+                <li>Wikipedia Contributors. "Electric bicycle." Wikipedia, The Free Encyclopedia.</li>
+                <li>VolteByk India (2025). "Electric Cycle Kit with Battery - Component Pricing." voltebyk.in</li>
+                <li>Mihogo (2025). "E-bike Technology Trends 2025: Smart Features & Innovation."</li>
+                <li>MS Energy. "How Does an Electric Bike Work?" msenergy.hr</li>
+                <li>Schwinn Bikes. "How Do Electric Bikes Work?" schwinnbikes.com</li>
+                <li>Really Good E-Bikes. "The Anatomy of an Electric Bicycle: A Comprehensive Breakdown."</li>
+                <li>Aventon. "E-bike vs. Regular Bike: What's the Difference?"</li>
+                <li>Canyon US (2022). "E-bike vs. regular bike: Which one is right for you?"</li>
+                <li>Make Magazine. "How I Built My First Electric Bike."</li>
+                <li>Indian Standards (IS 15496): Electric Power-Assisted Bicycle Specifications</li>
+                <li>Bureau of Indian Standards (BIS) - Battery Safety Standards</li>
+            </ol>
+        </section>
+
+        <div class="info-box" style="margin-top: 3rem; text-align: center;">
+            <h4>📄 End of Documentation</h4>
+            <p>This document represents the complete technical documentation of the Electric Bicycle College Project.</p>
+            <p><strong>Version 1.0</strong> | Prepared: 2026 | For Academic Purposes</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="doc-footer">
+        <p><strong>Electric Bicycle Engineering Project</strong></p>
+        <p>College Project Documentation | © 2025-2026</p>
+        <p style="margin-top: 1rem;">
+            <a href="index.html" style="color: #e74c3c; text-decoration: none;">← Back to Landing Page</a>
+        </p>
+    </footer>
+</body>
+</html>
